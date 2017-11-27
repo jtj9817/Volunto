@@ -1,1 +1,1 @@
-web: gunicorn volunto.wsgi --log-file -
+web: gunicorn voluntoweb.wsgi --log-file -
