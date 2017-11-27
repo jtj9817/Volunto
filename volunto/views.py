@@ -37,7 +37,7 @@ def register(request):
 			user.save()
 			user = authenticate(username=username, password=password)
 			login(request, user)
-			return redirect('volunto/index')
+			return render(request,'volunto/index.html')
 	else:
 		form = UserForm()
 	return render(request, 'volunto/registration_form.html', {'form': form})
