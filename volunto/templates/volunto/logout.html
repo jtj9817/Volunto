@@ -1,0 +1,8 @@
+{% extends 'volunto/base_visitor.html' %}
+{% block title %}Log Out{% endblock %}
+
+{% block content %}
+<p>Logged out!</p>  
+
+<a href="{% url 'volunto:login_user'%}">Click here to login again.</a>
+{% endblock %}

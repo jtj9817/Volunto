@@ -6,8 +6,11 @@ from django.contrib.auth import authenticate, login
 from .forms import UserForm
 from django.views import generic
 from .models import Project, Organization 
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+# attached @login_required later once log_in system has been implemented
 def index(request):
 	return render(request, 'volunto/index.html')
 
@@ -41,7 +44,8 @@ def register(request):
 	else:
 		form = UserForm()
 	return render(request, 'volunto/registration_form.html', {'form': form})
-
+def logout_user(request):
+	return render(request, 'volunto/logout.html')		
 #Views for Projects 
 class ProjectListView(generic.ListView):
 	model = Project

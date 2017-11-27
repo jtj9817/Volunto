@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login_user/$', views.login_user, name='login_user'),
+     url(r'^logout_user/$', views.logout_user, name='logout_user'),
     url(r'^projects/$', views.ProjectListView.as_view(), name='projects'),
     url(r'^organizations/$', views.OrganizationListView.as_view(), name='organizations'),
     url(r'^project/(?P<pk>\d+)$', views.ProjectDetailView.as_view(), name='project-detail'),

@@ -32,6 +32,16 @@
                 <li><a href="{% url 'volunto:projects' %}">Projects</a></li>
                 <li><a href="{% url 'volunto:organizations' %}">Organizations</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                 <li><a><strong>User: {{ user.get_username }}</strong></a></li>
+                 {% csrf_token %}
+                 <li><a href="{% url 'volunto:logout_user'%}?next={{request.path}}">Logout</a></li>   
+               {% else %}
+                 {% csrf_token %}
+                 <li><a href="{% url 'volunto:login_user'%}?next={{request.path}}">Login</a></li>   
+               {% endif %} 
+            </ul>
         </div>
     </div>
 </nav>
