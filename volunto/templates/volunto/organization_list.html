@@ -1,0 +1,18 @@
+{% extends 'volunto/base_visitor.html' %}
+{% block content %}
+    <h1>Organizations List</h1>
+
+    {% if organizations_list %}
+    <ul>
+
+      {% for organization in organizations_list %}
+      <li>
+        <a href="/volunto/{{ organization.orgid }}/">{{ organization.orgname }}</a> 
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no projects currently active.</p>
+    {% endif %}       
+{% endblock %}

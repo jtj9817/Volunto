@@ -1,0 +1,4 @@
+voluntoenv
+*.pyc
+staticfiles
+.env

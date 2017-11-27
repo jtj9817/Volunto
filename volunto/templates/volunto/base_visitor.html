@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>{% block title %}Volunto{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'volunto/style.css' %}"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="{% block register_active %}{% endblock %}"><a href="{% url 'volunto:register' %}">Register</a></li>
+                <li class="{% block login_active %}{% endblock %}"><a href="{% url 'volunto:login_user' %}">Log In</a></li>
+                <li><a href="{% url 'volunto:projects' %}">Projects</a></li>
+                <li><a href="{% url 'volunto:organizations' %}">Organizations</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block content %}
+{% endblock %}
+</body>
+</html>
