@@ -29,8 +29,6 @@
             <ul class="nav navbar-nav">
                 <li class="{% block register_active %}{% endblock %}"><a href="{% url 'volunto:register' %}">Register</a></li>
                 <li class="{% block login_active %}{% endblock %}"><a href="{% url 'login' %}">Log In</a></li>
-                <li><a href="{% url 'volunto:projects' %}">Projects</a></li>
-                <li><a href="{% url 'volunto:organizations' %}">Organizations</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
