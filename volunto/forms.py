@@ -19,7 +19,7 @@ class UserForm(forms.ModelForm):
 			# Unable to find a user, this is fine
 			return email
 		# A user was found with this as a username, raise an error.
-	   	raise forms.ValidationError('This email address is already in use.')
+		raise forms.ValidationError('This email address is already in use.')
 
 class ProjectsForm(forms.ModelForm):
 	class Meta:
