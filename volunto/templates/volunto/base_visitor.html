@@ -27,8 +27,13 @@
         <!-- Items -->
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
-                <li class="{% block register_active %}{% endblock %}"><a href="{% url 'volunto:register' %}">Register</a></li>
-                <li class="{% block login_active %}{% endblock %}"><a href="{% url 'login' %}">Log In</a></li>
+                {% if user.is_authenticated %}
+                  <li><a href="{% url 'volunto:projects' %}">Projects</a></li>
+                  <li><a href="{% url 'volunto:organizations' %}">Organizations</a></li>
+                {% else %}
+                  <li class="{% block register_active %}{% endblock %}"><a href="{% url 'volunto:register' %}">Register</a></li>
+                  <li class="{% block login_active %}{% endblock %}"><a href="{% url 'login' %}">Log In</a></li>
+                {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
