@@ -36,7 +36,6 @@
                  <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
                {% else %}
                  {% csrf_token %}
-                 <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
                {% endif %} 
             </ul>
         </div>
