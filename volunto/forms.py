@@ -3,9 +3,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Project, Organization
 from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput)
+	email = forms.EmailField(widget=forms.EmailInput, required=True)
 	class Meta: 
 		model = User
 		fields = ['username', 'email', 'password']
@@ -13,10 +15,6 @@ class UserForm(forms.ModelForm):
 	def clean_email(self):
 		# Get the email
 		email = self.cleaned_data.get('email')
-		try:
-			validate_email(email)
-		except validate_email.ValidationError:
-    			print('Invalid email address')
 		# Check to see if any users already exist with this email as a username.
 		try:
 			match = User.objects.get(email=email)
