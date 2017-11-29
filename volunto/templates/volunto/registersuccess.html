@@ -1,0 +1,14 @@
+{% extends 'volunto/base_visitor.html' %}
+{% block title %}Registration Success{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="alert alert-success">
+    <strong>Registration Successful!</strong>
+    <p>You've successfully registered and your account is now active!
+    Click <a href="{% url 'volunto:index'%}">here</a> to return to Volunto's index.
+	</p>
+  </div>
+</div>
+
+{% endblock %}

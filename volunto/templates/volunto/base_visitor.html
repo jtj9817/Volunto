@@ -8,7 +8,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'volunto/style.css' %}"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
                 <li class="{% block register_active %}{% endblock %}"><a href="{% url 'volunto:register' %}">Register</a></li>
-                <li class="{% block login_active %}{% endblock %}"><a href="{% url 'volunto:login_user' %}">Log In</a></li>
+                <li class="{% block login_active %}{% endblock %}"><a href="{% url 'login' %}">Log In</a></li>
                 <li><a href="{% url 'volunto:projects' %}">Projects</a></li>
                 <li><a href="{% url 'volunto:organizations' %}">Organizations</a></li>
             </ul>
@@ -36,10 +36,10 @@
                 {% if user.is_authenticated %}
                  <li><a><strong>User: {{ user.get_username }}</strong></a></li>
                  {% csrf_token %}
-                 <li><a href="{% url 'volunto:logout_user'%}?next={{request.path}}">Logout</a></li>   
+                 <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
                {% else %}
                  {% csrf_token %}
-                 <li><a href="{% url 'volunto:login_user'%}?next={{request.path}}">Login</a></li>   
+                 <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
                {% endif %} 
             </ul>
         </div>

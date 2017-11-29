@@ -40,7 +40,7 @@ def register(request):
 			user.save()
 			user = authenticate(username=username, password=password)
 			login(request, user)
-			return render(request,'volunto/index.html')
+			return render(request,'volunto/registersuccess.html')
 	else:
 		form = UserForm()
 	return render(request, 'volunto/registration_form.html', {'form': form})
