@@ -1,19 +1,25 @@
 {% extends 'volunto/base_visitor.html' %}
 {% block content %}
 <div class="container-fluid">
-    <h1>Projects List</h1>
-
+    <div class="panel panel-default col-sm-4 col-md-4">
+      <div class="panel-heading">
+        <h1 text-align="center">Projects List</h1>
+      </div>
+    <div class="panel-body">
     {% if projects_list %}
-    <ul>
+    <ul class="nav nav-pills nav-stacked">
       {% for project in projects_list %}
+      <div class="well">
       <li>
         <a href="{{ project.get_absolute_url }}">{{ project.projectname }}</a> 
       </li>
+    </div>
       {% endfor %}
-
     </ul>
     {% else %}
       <p>There are no projects currently active.</p>
-    {% endif %}       
+    {% endif %}
   </div>
+      </div>
+</div>     
 {% endblock %}
