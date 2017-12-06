@@ -50,22 +50,34 @@ def logout_user(request):
 class ProjectListView(generic.ListView):
 	model = Project
 	context_object_name = 'projects_list'
+	queryset = Project.objects.all()
 	template_name = 'volunto/project_list.html'
 
 	def get_queryset(self):
 		return Project.objects.all()
+	def get_context_data(self, **kwargs):
+		context = super(ProjectListView, self).get_context_data(**kwargs)
+		context['Temp data'] = 'Temp data for projects'
+		return context
 
 class ProjectDetailView(generic.DetailView):
 	model = Project
+	template_name = "volunto/project_detail.html"
 
 #Views for Organizations
 class OrganizationListView(generic.ListView):
 	model = Organization 
+	queryset = Organization.objects.all()
 	context_object_name = 'organizations_list'
 	template_name = 'volunto/organization_list.html'
 
 	def get_queryset(self):
 		return Organization.objects.all()
+	def get_context_data(self, **kwargs):
+		context = super(OrganizationListView, self).get_context_data(**kwargs)
+		context['Temp data'] = 'Temp data for org'
+		return context
 
 class OrganizationDetailView(generic.DetailView):
 	model = Organization
+	template_name = 'volunto/organization_detail.html'

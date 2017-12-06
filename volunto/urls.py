@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^projects/$', views.ProjectListView.as_view(), name='projects'),
     url(r'^organizations/$', views.OrganizationListView.as_view(), name='organizations'),
     url(r'^project/(?P<pk>\d+)$', views.ProjectDetailView.as_view(), name='project-detail'),
+    url(r'^organization/(?P<pk>\d+)$', views.OrganizationDetailView.as_view(), name='organization-detail'),    
+    #url(r'^(?P<pk>[-\w]+)/$', views.ProjectDetailView.as_view(), name='project-detail'),
 ]

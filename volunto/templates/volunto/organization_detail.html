@@ -1,0 +1,9 @@
+{% extends "volunto/base_visitor.html" %}
+
+{% block content %}
+
+<h1>Organization Name: {{ organization.orgname }}</h1>
+
+<p><strong>Organization Description:</strong> {{ organization.orgdesc }}</p>
+<p><strong>Organization Status:</strong> {{ organization.get_org_status }}</p>
+{% endblock %}
