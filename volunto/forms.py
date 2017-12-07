@@ -6,6 +6,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
 class UserForm(forms.ModelForm):
+	username = forms.CharField(max_length=30,min_length=5)
 	password = forms.CharField(widget=forms.PasswordInput)
 	email = forms.EmailField(widget=forms.EmailInput, required=True)
 	class Meta: 
