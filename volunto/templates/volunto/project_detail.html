@@ -1,9 +1,12 @@
 {% extends "volunto/base_visitor.html" %}
 
 {% block content %}
-
-<h1>Project Title: {{ project.projectname }}</h1>
-
-<p><strong>Project Description:</strong> {{ project.projdesc }}</p>
-<p><strong>Project organized by:</strong> {{ project.organization }}</p>
+<div class="container-fluid">
+	<div class="panel panel-default col-sm-4 col-md-4">
+<h1>{{ project.projectname }}</h1>
+<strong>Project Description</strong> <p>{{ project.projdesc }}</p>
+<strong>Project organized by:</strong> <p>{{ project.orgname }}</p>
+  <button type="button" class="btn btn-primary btn-lg navbar-btn">Join Project</button>
+	</div>
+</div>
 {% endblock %}

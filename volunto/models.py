@@ -21,6 +21,9 @@ class Organization(models.Model):
 	orgstat = models.PositiveIntegerField(choices=ORG_STATUS, default=3)
 	def __str__(self):
 		return self.orgname
+	def get_absolute_url(self):
+		#Returns a URL for accessing an Organization object instance
+		return reverse('volunto:organization-detail', args=(self.orgid,))
 
 class Project(models.Model):
 	projectname = models.CharField(max_length=200)
@@ -32,7 +35,7 @@ class Project(models.Model):
 		return self.projectname
 	def get_absolute_url(self):
 		#Returns a URL for accessing a Project object instance
-		return reverse('project-detail', args=[str(self.projectid)])
+		return reverse('volunto:project-detail', args=(self.projectid,))
 
 class School(models.Model):
 	schoolname = models.CharField(max_length=200)
