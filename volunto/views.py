@@ -3,11 +3,11 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import UserForm
+from .forms import UserForm, ProjectsForm
 from django.views import generic
 from .models import Project, Organization 
 from django.contrib.auth.decorators import login_required
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 # attached @login_required later once log_in system has been implemented
@@ -64,6 +64,11 @@ class ProjectDetailView(generic.DetailView):
 	model = Project
 	template_name = "volunto/project_detail.html"
 
+class ProjectCreate(CreateView):
+	model = Project
+	fields = '__all__'
+
+
 #Views for Organizations
 class OrganizationListView(generic.ListView):
 	model = Organization 
@@ -81,3 +86,18 @@ class OrganizationListView(generic.ListView):
 class OrganizationDetailView(generic.DetailView):
 	model = Organization
 	template_name = 'volunto/organization_detail.html'
+
+
+def create_project(request):
+	if request.method == 'POST':
+		form = ProjectsForm(request.POST)
+		if form.is_valid():
+			project = form.save(commit=False)
+			projectname = form.cleaned_data.get('projectname')
+			projdesc = form.cleaned_data.get('password')
+			projstatus = form.cleaned_data.get('projstatus')
+			project.save()
+			return render(request,'volunto/project_success.html')
+	else:
+		form = ProjectsForm()
+	return render(request, 'volunto/project_create.html')#, {'form': form})

@@ -1,0 +1,14 @@
+{% extends 'volunto/base_visitor.html' %}
+{% block title %}Project Creation Success{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="alert alert-success">
+    <strong>Project Creation Successful!</strong>
+    <p>You've successfully created a project and it's activate!
+    Click <a href="{% url 'volunto:projects'%}">here</a> to return to Projects list.
+	</p>
+  </div>
+</div>
+
+{% endblock %}
