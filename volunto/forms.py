@@ -25,10 +25,7 @@ class UserForm(forms.ModelForm):
 		# A user was found with this as a username, raise an error.
 		raise forms.ValidationError('This email address is already in use.')
 
-class ProjectsForm(forms.Form):
-	projectname = forms.CharField(max_length=30, min_length=5, required=True)
-	projectdesc = forms.CharField(widget=forms.TextInput)
-	projstatus = forms.BooleanField(widget=forms.CheckboxInput)
+class ProjectsForm(forms.ModelForm):
 	class Meta:
 		model = Project
 		fields = ['projectname', 'projdesc', 'projstatus', 'orgname']
@@ -37,3 +34,11 @@ class OrganizationForm(forms.ModelForm):
 	class Meta:
 		model = Organization
 		fields = ['orgname', 'orgdesc']
+
+class ProjectsCreationForm(forms.Form):
+	projectname = forms.CharField(max_length=30, min_length=5, required=True)
+	projectdesc = forms.CharField(widget=forms.Textarea)
+	projstatus = forms.BooleanField(widget=forms.CheckboxInput)
+	class Meta:
+		model = Project
+		fields = '__all__'

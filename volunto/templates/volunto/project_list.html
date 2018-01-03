@@ -6,7 +6,7 @@
         <h1 text-align="center">Projects List</h1>
       </div>
     <div class="panel-body">
-    <a href="{% url 'volunto:create_project' %}">Create a new project!</a>
+    <a href="{% url 'volunto:project_create' %}">Create a new project!</a>
     {% if projects_list %}
     <ul class="nav nav-pills nav-stacked">
       {% for project in projects_list %}

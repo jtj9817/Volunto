@@ -8,6 +8,7 @@ from django.views import generic
 from .models import Project, Organization 
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 # attached @login_required later once log_in system has been implemented
@@ -47,7 +48,7 @@ def register(request):
 def logout_user(request):
 	return render(request, 'volunto/logout.html')		
 #Views for Projects 
-class ProjectListView(generic.ListView):
+class ProjectListView(LoginRequiredMixin,generic.ListView):
 	model = Project
 	context_object_name = 'projects_list'
 	queryset = Project.objects.all()
@@ -60,17 +61,18 @@ class ProjectListView(generic.ListView):
 		context['Temp data'] = 'Temp data for projects'
 		return context
 
-class ProjectDetailView(generic.DetailView):
+class ProjectDetailView(LoginRequiredMixin,generic.DetailView):
 	model = Project
 	template_name = "volunto/project_detail.html"
 
-class ProjectCreate(CreateView):
+class ProjectCreate(LoginRequiredMixin,CreateView):
 	model = Project
 	fields = '__all__'
 
 
 #Views for Organizations
-class OrganizationListView(generic.ListView):
+
+class OrganizationListView(LoginRequiredMixin,generic.ListView):
 	model = Organization 
 	queryset = Organization.objects.all()
 	context_object_name = 'organizations_list'

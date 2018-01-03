@@ -26,11 +26,11 @@ class Organization(models.Model):
 		return reverse('volunto:organization-detail', args=(self.orgid,))
 
 class Project(models.Model):
-	projectname = models.CharField(max_length=200)
-	projdesc = models.CharField(max_length=500)
+	projectname = models.CharField("Project Name",max_length=200)
+	projdesc = models.CharField("Project Description",max_length=500)
 	projectid = models.AutoField(primary_key=True)
-	projstatus = models.BooleanField(default=False)
-	orgname = models.ForeignKey(Organization, on_delete=models.CASCADE)
+	projstatus = models.BooleanField("Project Status", default=False)
+	orgname = models.ForeignKey(Organization, on_delete=models.CASCADE, verbose_name="Project Sponsor")
 	def __str__(self):
 		return self.projectname
 	def get_absolute_url(self):
