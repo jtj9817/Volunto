@@ -63,3 +63,8 @@ class Position(models.Model):
 	def __str__(self):
 		return self.postitle
 
+class Application(models.Model):
+	applicationid = models.AutoField(primary_key=True)
+	project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name="Project Name")
+	applicant_firstname = models.CharField("First Name",max_length=30)
+	applicant_lastname = models.CharField("Last Name",max_length=30)

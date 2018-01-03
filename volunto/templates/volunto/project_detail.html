@@ -6,7 +6,7 @@
 <h1>{{ project.projectname }}</h1>
 <strong>Project Description</strong> <p>{{ project.projdesc }}</p>
 <strong>Project organized by:</strong> <p>{{ project.orgname }}</p>
-  <button type="submit" class="btn btn-primary btn-lg navbar-btn">Join Project</button>
+	<a href="{% url 'volunto:create_application' %}" class="btn btn-info" role="button">Join Project</a>
 	</div>
 </div>
 {% endblock %}

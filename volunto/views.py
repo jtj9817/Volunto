@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import UserForm, ProjectsForm
 from django.views import generic
-from .models import Project, Organization 
+from .models import Project, Organization, Application
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -89,7 +89,33 @@ class OrganizationDetailView(generic.DetailView):
 	model = Organization
 	template_name = 'volunto/organization_detail.html'
 
+# Views for Application
+class ApplicationCreate(LoginRequiredMixin,CreateView):
+	model = Application
+	fields = '__all__'
+	success_url = 'application_sent/'
 
+def application_sent(request):
+	return render(request, 'volunto/application_sent.html')
+
+
+## These views are to be used in near future
+def join_project(request):
+	if request.method == 'POST':
+		form = ProjectsForm(request.POST)
+		if form.is_valid():
+			project = form.save(commit=False)
+			projectname = form.cleaned_data.get('projectname')
+			projdesc = form.cleaned_data.get('password')
+			projstatus = form.cleaned_data.get('projstatus')
+			project.save()
+			return render(request,'volunto/project_success.html')
+	else:
+		form = ProjectsForm()
+	return render(request, 'volunto/project_join.html')
+
+
+##Unused project creation
 def create_project(request):
 	if request.method == 'POST':
 		form = ProjectsForm(request.POST)
