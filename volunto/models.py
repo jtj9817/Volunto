@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
+from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
@@ -77,7 +79,8 @@ class Profile(models.Model):
 	slug = models.SlugField(max_length=30,unique=True, null=True, default=None)
 	bio = models.TextField(max_length=500, blank=True)
 	location = models.CharField(max_length=30, blank=True)
-	phone = models.CharField(max_length=10, blank=True)
+	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,10}$', message="Phone number must be entered in the format: '+2234567899'. Only 10 digits allowed.")
+	phone = models.CharField(validators=[phone_regex], max_length=10,blank=True, null=False, unique=True)
 	experience_level_choices = (
 		(1, 'No Experience'),
 		(2, 'Some Experience'),

@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Project, Organization, Profile, Volunteer, Application, School
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-from django.utils.text import slugify
 
 
 class UserForm(forms.ModelForm):
@@ -32,8 +31,6 @@ class UserForm(forms.ModelForm):
 		except User.DoesNotExist:
 			return email
 		raise forms.ValidationError('This email address is already in use.')
-
-	 #Save an instance of the User object as a Profile object
 
 
 class ProjectsForm(forms.ModelForm):
