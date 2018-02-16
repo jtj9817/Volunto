@@ -84,7 +84,7 @@ class ProjectUpdate(LoginRequiredMixin, UpdateView):
 	fields = '__all__'
 class ProjectDelete(LoginRequiredMixin,DeleteView):
 	model = Project
-	scuess_url = reverse_lazy('projects')
+	success_url = reverse_lazy('volunto:projects')
 
 
 #Views for Organizations
