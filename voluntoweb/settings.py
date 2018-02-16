@@ -83,7 +83,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'voluntodb',
         'USER': 'joshadmin',
-        'PASSWORD': 'vfj6jzb8xfjb',
         'HOST': '',
         'PORT': '',
     }
