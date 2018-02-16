@@ -1,0 +1,25 @@
+{% extends 'volunto/base_visitor.html' %}
+{% block title %}Update User Profile{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Update User Profile</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="{{ profile.get_update_url}}" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }} 
+                                <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

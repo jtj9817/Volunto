@@ -38,6 +38,8 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                  <li><a><strong>User: {{ user.get_username }}</strong></a></li>
+                 <li><a href="{% url 'dj-auth:profile' %}"><strong>View Profile</strong></a></li>
+                 <li><a href="{% url 'dj-auth:profile_update' %}"><strong>Edit Profile</strong></a></li>
                  {% csrf_token %}
                  <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
                {% endif %} 

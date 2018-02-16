@@ -1,0 +1,21 @@
+{% extends "volunto/base_visitor.html" %}
+
+{% block content %}
+<div class="container-fluid">
+<h2> {{ user.get_username}}'s Profile</h2>
+	<div class="card">
+		<div class="card-block">
+		<p class="card-text">
+		First Name: {{ user.get_short_name }} <br>
+		Last Name: {{ request.user.last_name}} <br>
+		Biography: {{ user.profile.bio }} <br>
+		Location: {{ user.profile.location}} <br>
+		Phone: {{ user.profile.phone }} <br>
+		Experience Level: {{ user.profile.experience_level }} <br>
+		Area of Experience: {{ user.profile.experience_area }} <br>
+		Education Level: {{ user.profile.education_level }} <br>
+		</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

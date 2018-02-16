@@ -1,0 +1,18 @@
+{% extends 'volunto/base_visitor.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="panel panel-default col-sm-4 col-md-4">
+      <div class="panel-heading">
+        <h1 text-align="center">Project Deletion</h1>
+      </div>
+    <div class="panel-body">
+      <p>Are you sure you want to delete the project: {{ project }}?</p>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" action="" value="Yes, delete." />
+        <a href
+      </form>
+    </div>
+    </div>
+</div>     
+{% endblock %}

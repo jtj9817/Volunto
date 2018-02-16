@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User, Permission
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.conf import settings
 
 # Create your models here.
 
@@ -68,3 +71,46 @@ class Application(models.Model):
 	project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name="Project Name")
 	applicant_firstname = models.CharField("First Name",max_length=30)
 	applicant_lastname = models.CharField("Last Name",max_length=30)
+
+class Profile(models.Model):
+	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	slug = models.SlugField(max_length=30,unique=True, null=True, default=None)
+	bio = models.TextField(max_length=500, blank=True)
+	location = models.CharField(max_length=30, blank=True)
+	phone = models.CharField(max_length=10, blank=True)
+	experience_level_choices = (
+		(1, 'No Experience'),
+		(2, 'Some Experience'),
+		(3, 'Experienced with certification')
+		)
+	experience_level = models.PositiveIntegerField(choices=experience_level_choices, default=1)
+	experience_area_choices =(
+		(1, 'Technology'),
+		(2, 'Hospitality'),
+		(3, 'Education'),
+		(4, 'Miscellaneous')
+		)
+	experience_area = models.PositiveIntegerField(choices=experience_area_choices, default=4)
+	education_level_choices = (
+		(1, 'Secondary'),
+		(2, 'Post Secondary')
+		)
+	education_level = models.PositiveIntegerField(choices=education_level_choices, default=1)
+
+	#Verbose name for Django Admin interface of Profile
+	def __str__(self):
+		return self.user.username
+
+	#Use to redirect to Profile Update page
+	def get_update_url(self):
+		return reverse('dj-auth:profile_update')
+
+	def get_absolute_url(self):
+		return reverse('dj-auth:profile')
+	#Methods to create and update Profile once a User was created
+	def create_profile(sender, **kwargs):
+		user=kwargs["instance"]
+		if kwargs["created"]:
+			user_profile = Profile(user=user)
+			user_profile.save()
+	post_save.connect(create_profile, sender=User)

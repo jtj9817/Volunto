@@ -7,6 +7,8 @@
 <strong>Project Description</strong> <p>{{ project.projdesc }}</p>
 <strong>Project organized by:</strong> <p>{{ project.orgname }}</p>
 	<a href="{% url 'volunto:create_application' %}" class="btn btn-info" role="button">Join Project</a>
+	<a href="{% url 'volunto:project_update' project.pk %}" class="btn btn-primary" role="button">Edit Project</a>
+	<a href="{% url 'volunto:project_delete' project.pk %}" class="btn btn-warning" role="button">Delete Project</a>
 	</div>
 </div>
 {% endblock %}

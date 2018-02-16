@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Project, Organization
+from .models import Project, Organization, Profile, Volunteer, Application, School
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.utils.text import slugify
+
 
 class UserForm(forms.ModelForm):
 	username = forms.CharField(max_length=30,min_length=5)
@@ -13,17 +15,26 @@ class UserForm(forms.ModelForm):
 		model = User
 		fields = ['username', 'email', 'password']
 
+	#Clean username data field to avoid conflict with URL slugging	
+	def clean_username(self):
+		username = self.cleaned_data['username']
+		disallowed = ('activate', 'create', 'disable', 'login', 'logout', 'password', 'profile',)
+		if username in disallowed:
+			raise ValidationError("A user with that username already exists")
+		return username
+
+	#Clean email and check to see if user with same email is already registered
 	def clean_email(self):
-		# Get the email
 		email = self.cleaned_data.get('email')
 		# Check to see if any users already exist with this email as a username.
 		try:
 			match = User.objects.get(email=email)
 		except User.DoesNotExist:
-			# Unable to find a user, this is fine
 			return email
-		# A user was found with this as a username, raise an error.
 		raise forms.ValidationError('This email address is already in use.')
+
+	 #Save an instance of the User object as a Profile object
+
 
 class ProjectsForm(forms.ModelForm):
 	class Meta:
@@ -35,10 +46,8 @@ class OrganizationForm(forms.ModelForm):
 		model = Organization
 		fields = ['orgname', 'orgdesc']
 
-class ProjectsCreationForm(forms.Form):
-	projectname = forms.CharField(max_length=30, min_length=5, required=True)
-	projectdesc = forms.CharField(widget=forms.Textarea)
-	projstatus = forms.BooleanField(widget=forms.CheckboxInput)
+#Form for User profile and to be extended using the Profile model
+class UserCreationForm(forms.ModelForm):
 	class Meta:
-		model = Project
-		fields = '__all__'
+		model = User
+		fields = ['first_name', 'last_name', 'email']

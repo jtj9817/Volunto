@@ -1,0 +1,15 @@
+{% extends "volunto/base_visitor.html" %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="card">
+		<div class="card-title">Edit Profile</div>
+			<form action="." method="POST" class="padding">
+            {% csrf_token %} {{ profile_render_form.as_p }}
+            {{ formset.management_form }}
+                {{ formset.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+ 			</form>
+	</div>
+</div>
+{% endblock %}
